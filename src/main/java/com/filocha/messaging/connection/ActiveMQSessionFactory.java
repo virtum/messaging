@@ -9,13 +9,13 @@ import javax.jms.ExceptionListener;
 import javax.jms.JMSException;
 import javax.jms.Session;
 
-public class ActiveMQSessionFactory implements ExceptionListener {
+public class ActiveMQSessionFactory implements ExceptionListener, AutoCloseable {
 
     private Connection connection;
     private Session session;
     private Logger logger = LoggerFactory.getLogger(ActiveMQSessionFactory.class);
 
-    public void createConnection(String activeMqPort) {
+    public Session createConnection(String activeMqPort) {
         try {
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(activeMqPort);
             connection = connectionFactory.createConnection();
@@ -27,11 +27,13 @@ public class ActiveMQSessionFactory implements ExceptionListener {
         } catch (JMSException e) {
             logger.error(e.getMessage());
         }
+        return session;
     }
 
     public synchronized void onException(JMSException ex) {
         logger.error("JMS Exception occured.  Shutting down client.");
     }
+
 
     public void close() {
         try {

@@ -1,4 +1,4 @@
-package com.filocha.messaging.exchange;
+package com.filocha.messaging.server;
 
 public interface ResponseCommand {
     boolean support(Class<?> reqClass);
@@ -6,4 +6,5 @@ public interface ResponseCommand {
     String onMessage(String message);
 
     Class<?> getResponseType();
+
 }

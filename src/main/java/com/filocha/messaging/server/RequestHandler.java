@@ -1,4 +1,4 @@
-package com.filocha.messaging.exchange;
+package com.filocha.messaging.server;
 
 public interface RequestHandler<TRequest, TResponse> {
 
