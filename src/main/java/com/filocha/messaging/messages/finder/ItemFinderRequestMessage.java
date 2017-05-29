@@ -1,13 +1,26 @@
 package com.filocha.messaging.messages.finder;
 
 public class ItemFinderRequestMessage {
-    public String getItemName() {
-        return itemName;
+
+
+    private String email;
+    private String item;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    private String itemName;
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+
 }
