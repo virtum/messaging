@@ -19,17 +19,17 @@ public class ServerBusImpl implements ServerBus, MessageListener, AutoCloseable 
     private MessageProducer producer;
 
 
-    public void setConsumerAndProducer(String activeMqPort) {
+    public void setConsumerAndProducer(String activeMqPort, String consumerQueue, String producerQueue) {
         try {
             ActiveMQSessionFactory activeMQSessionFactory = new ActiveMQSessionFactory();
             Session session = activeMQSessionFactory.createConnection(activeMqPort);
 
-            consumer = session.createConsumer(session.createQueue("REQUEST.QUEUE"));
+            consumer = session.createConsumer(session.createQueue(consumerQueue));
 
             MessageListener listener = this;
             consumer.setMessageListener(listener);
 
-            producer = session.createProducer(session.createQueue("RESPONSE.QUEUE"));
+            producer = session.createProducer(session.createQueue(producerQueue));
             producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
         } catch (JMSException e) {

@@ -20,17 +20,17 @@ public class ClientBusImpl implements ClientBus, MessageListener, AutoCloseable 
     private MessageProducer producer;
     private MessageConsumer consumer;
 
-    public void setConsumerAndProducer(String activeMqPort) {
+    public void setConsumerAndProducer(String activeMqPort, String consumerQueue, String producerQueue) {
         try {
             ActiveMQSessionFactory activeMQSessionFactory = new ActiveMQSessionFactory();
             Session session = activeMQSessionFactory.createConnection(activeMqPort);
 
-            consumer = session.createConsumer(session.createQueue("RESPONSE.QUEUE"));
+            consumer = session.createConsumer(session.createQueue(consumerQueue));
 
             MessageListener listener = this;
             consumer.setMessageListener(listener);
 
-            producer = session.createProducer(session.createQueue("REQUEST.QUEUE"));
+            producer = session.createProducer(session.createQueue(producerQueue));
             producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
         } catch (JMSException e) {
             logger.error(e.getMessage(), e);
