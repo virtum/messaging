@@ -2,23 +2,23 @@
 <metadata modelVersion="1.1.0">
   <groupId>com.filocha</groupId>
   <artifactId>messaging</artifactId>
-  <version>1.5-SNAPSHOT</version>
+  <version>1.6-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20180101.144248</timestamp>
+      <timestamp>20180101.150217</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20180101144248</lastUpdated>
+    <lastUpdated>20180101150217</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.5-20180101.144248-1</value>
-        <updated>20180101144248</updated>
+        <value>1.6-20180101.150217-1</value>
+        <updated>20180101150217</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.5-20180101.144248-1</value>
-        <updated>20180101144248</updated>
+        <value>1.6-20180101.150217-1</value>
+        <updated>20180101150217</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
