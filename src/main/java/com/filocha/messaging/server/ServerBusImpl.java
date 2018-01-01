@@ -60,11 +60,7 @@ public class ServerBusImpl implements ServerBus, MessageListener, AutoCloseable 
                 response.writeBytes(res.getBytes());
                 producer.send(response);
             }
-        } catch (ClassNotFoundException e) {
-            logger.error(e.getMessage());
-        } catch (UnsupportedEncodingException e) {
-            logger.error(e.getMessage());
-        } catch (JMSException e) {
+        } catch (ClassNotFoundException | UnsupportedEncodingException | JMSException e) {
             logger.error(e.getMessage());
         }
     }

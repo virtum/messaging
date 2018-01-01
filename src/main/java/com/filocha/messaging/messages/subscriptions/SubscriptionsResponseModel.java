@@ -1,18 +1,11 @@
 package com.filocha.messaging.messages.subscriptions;
 
+import lombok.Builder;
+
 import java.util.List;
 
+@Builder
 public class SubscriptionsResponseModel {
 
     private List<String> userSubscriptions;
-
-    public List<String> getUserSubscriptions() {
-        return userSubscriptions;
-    }
-
-    public void setUserSubscriptions(List<String> userSubscriptions) {
-        this.userSubscriptions = userSubscriptions;
-    }
-
-
 }
