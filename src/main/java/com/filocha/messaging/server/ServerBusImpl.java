@@ -10,7 +10,6 @@ import javax.jms.*;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public class ServerBusImpl implements ServerBus, MessageListener, AutoCloseable {
 
@@ -40,34 +39,30 @@ public class ServerBusImpl implements ServerBus, MessageListener, AutoCloseable 
 
     @Override
     public void onMessage(Message message) {
-        Executors
-                .newFixedThreadPool(10)
-                .execute(() -> {
-                    try {
-                        ActiveMQBytesMessage bytesMessage = (ActiveMQBytesMessage) message;
-                        String corrId = bytesMessage.getCorrelationId();
+        try {
+            ActiveMQBytesMessage bytesMessage = (ActiveMQBytesMessage) message;
+            String corrId = bytesMessage.getCorrelationId();
 
-                        String classType = bytesMessage.getType();
-                        Class<?> reqClazz = Class.forName(classType);
+            String classType = bytesMessage.getType();
+            Class<?> reqClazz = Class.forName(classType);
 
-                        ActiveMQBytesMessage response = new ActiveMQBytesMessage();
-                        String msg = new String(bytesMessage.getContent().data, "UTF-8");
+            ActiveMQBytesMessage response = new ActiveMQBytesMessage();
+            String msg = new String(bytesMessage.getContent().data, "UTF-8");
 
-                        for (ResponseCommand handler : handlers) {
-                            if (!handler.support(reqClazz)) {
-                                continue;
-                            }
-                            String res = handler.onMessage(msg);
+            for (ResponseCommand handler : handlers) {
+                if (!handler.support(reqClazz)) {
+                    continue;
+                }
+                String res = handler.onMessage(msg);
 
-                            response.setType(handler.getResponseType().getName());
-                            response.setCorrelationId(corrId);
-                            response.writeBytes(res.getBytes());
-                            producer.send(response);
-                        }
-                    } catch (ClassNotFoundException | UnsupportedEncodingException | JMSException e) {
-                        logger.error(e.getMessage());
-                    }
-                });
+                response.setType(handler.getResponseType().getName());
+                response.setCorrelationId(corrId);
+                response.writeBytes(res.getBytes());
+                producer.send(response);
+            }
+        } catch (ClassNotFoundException | UnsupportedEncodingException | JMSException e) {
+            logger.error(e.getMessage());
+        }
     }
 
     public <TRequest, TResponse> void addHandler(RequestHandler<TRequest, TResponse> handler, Class<TRequest> reqClazz,
@@ -106,7 +101,6 @@ public class ServerBusImpl implements ServerBus, MessageListener, AutoCloseable 
         public Class<?> getResponseType() {
             return respClass;
         }
-
     }
 
     public void close() {
