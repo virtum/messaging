@@ -4,8 +4,8 @@
   <artifactId>messaging</artifactId>
   <versioning>
     <versions>
-      <version>1.7-SNAPSHOT</version>
+      <version>1.8-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20180402202728</lastUpdated>
+    <lastUpdated>20180402204445</lastUpdated>
   </versioning>
 </metadata>
