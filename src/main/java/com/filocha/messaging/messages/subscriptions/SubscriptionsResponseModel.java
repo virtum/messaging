@@ -9,5 +9,6 @@ import java.util.List;
 @Value
 public class SubscriptionsResponseModel {
 
-    private List<String> userSubscriptions;
+    private List<Subscription> userSubscriptions;
+    private Long subscriptionCounter;
 }
