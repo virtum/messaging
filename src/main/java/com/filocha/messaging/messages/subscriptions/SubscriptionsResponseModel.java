@@ -10,5 +10,4 @@ import java.util.List;
 public class SubscriptionsResponseModel {
 
     private List<Subscription> userSubscriptions;
-    private Long subscriptionCounter;
 }
