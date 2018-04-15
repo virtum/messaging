@@ -10,5 +10,5 @@ import java.util.List;
 public class SubscriptionDetailsResponseModel {
 
     private String itemName;
-    private List<UrlDetails> urls;
+    private List<String> urls;
 }
