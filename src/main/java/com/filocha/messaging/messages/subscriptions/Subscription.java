@@ -9,4 +9,5 @@ public class Subscription {
 
     private String itemName;
     private String creationDate;
+    private Integer numberOfFoundItems;
 }
