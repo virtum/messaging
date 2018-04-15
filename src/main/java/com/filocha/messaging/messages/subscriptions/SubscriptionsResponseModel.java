@@ -10,4 +10,5 @@ import java.util.List;
 public class SubscriptionsResponseModel {
 
     private List<Subscription> userSubscriptions;
+    private Integer numberOfFoundItems;
 }
