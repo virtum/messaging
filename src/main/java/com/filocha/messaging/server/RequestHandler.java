@@ -4,7 +4,7 @@ public interface RequestHandler<TRequest, TResponse> {
 
     TResponse onMessage(TRequest request);
 
-    TRequest getRequestClass();
+    Class<TRequest> getRequestClass();
 
-    TResponse getResponseClass();
+    Class<TResponse> getResponseClass();
 }
